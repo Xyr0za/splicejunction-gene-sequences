@@ -29,3 +29,59 @@ The table of this encoding is shown below.
 | 4 | 0 | 1 | 0 | 0 | 0 | 0 | ... | 1 | 0 | 1 | 0 | 0 | 2 |
 
 ![distribution of 1,2,3 class identifiers](dist.png)
+
+
+# Running Predictions
+
+
+```py
+import tensorflow as tf
+
+from splice_tils import splice_tils as st
+from splice_tils import CLASSIFICATIONS
+
+my_model = tf.keras.models.load_model('splicing.keras')
+
+
+
+import random
+
+rb = lambda : random.choice(['A', 'C', 'G', 'T'])
+
+ex_string = ''.join([rb() for _ in range(60)])
+
+converted = st.encode_sequence(ex_string)
+prediction = int(st.prediction(my_model, converted)[0])
+
+print(f"Random DNA sequence: {ex_string}")
+print(f"Predicted class: {prediction}")
+
+print(f"Meaning: {CLASSIFICATIONS[prediction]}")
+```
+
+Codebase consists of two functions, *"prediction"* and *"encode_sequence"*. 
+Pseudocode representations are below.
+
+```
+fn prediction(model, input_data):
+    Runs a pre-trained Keras model on a list of numbers, applying the required preprocessing.
+    
+    args:
+        model: A loaded Keras model.
+        input_data: A list of 180 numbers (single sample) OR a list of lists (multiple samples).
+
+    input: A list of 180 ints (0,1) (single sample) OR a list of lists (multiple samples).
+    output: int or list of ints [0,1,2]
+```
+
+```
+fn encode_sequence(sequence):
+        Converts a string of 60 bases into a list of 180 numbers, applying the required preprocessing.
+        
+        args:
+            sequence: A string of 60 characters representing nucleotide bases (A, C, G, T).
+
+        input: A string of 60 bases.
+        output: A list of 180 ints (0,1).
+```
+
