@@ -20,7 +20,7 @@ For the full code, please refer to splicing.ipynb.
 The dataset is in the form of 180 A_n x entries, where every 3 entries code for a single base.
 The table of this encoding is shown below.
 
-| Row | A0 | A1 | A2 | A3 | A4 | A5 | ... | A176 | A177 | A178 | A179 | A180 | class |
+| Row | A0 | A1 | A2 | A3 | A4 | A5 | ... | A175 | A176 | A177 | A178 | A179 | class |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | ... | 0 | 1 | 1 | 0 | 0 | 3 |
 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | ... | 0 | 0 | 0 | 1 | 0 | 3 |
